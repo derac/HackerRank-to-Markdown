@@ -75,9 +75,9 @@ print("Data from %s successful problems gathered."%len(problems_dict))
 language_dict = {"javascript":"javascript","python3":"python","pypy3":"python",
                  "oracle":"sql","bash":"bash"}
 with open(os.path.join(run_path,"README.md"),"w") as f:
-    for problem in problems_dict.values():
+    for problem in sorted(problems_dict.values(),key=lambda p:-float(p['display_score'])):
         f.write("# [%s](%s) - %s - %s"%(problem["name"],problem_url.format(problem["slug"]),
-                                        problem["language"],problem["display_score"]))
+                                        problem["display_score"],problem["language"]))
         language = language_dict[problem["language"]] if problem["language"] in language_dict else ''
         f.write("\n```%s\n%s\n```\n"%(language,problem["code"].strip()))
 print("README.md written.")
