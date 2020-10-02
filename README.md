@@ -373,7 +373,7 @@ for _ in range(int(input())):
     print(merge(A))
 ```
 # [New Year Chaos](https://www.hackerrank.com/challenges/new-year-chaos/problem) - 40.0 - python
-```
+```python
 #!/bin/python
 
 import math
@@ -2253,7 +2253,7 @@ print("First Element:",A[0])
 print("Last Element:",A[-1])
 ```
 # [Day 21: Generics](https://www.hackerrank.com/challenges/30-generics/problem) - 30.0 - csharp
-```
+```csharp
 public static void PrintArray<T>(T[] A) {
     foreach (T v in A) {
         Console.WriteLine(v);
@@ -7125,27 +7125,27 @@ def has_cycle(head):
     return 0
 ```
 # [Matching Specific String](https://www.hackerrank.com/challenges/matching-specific-string/problem) - 5.0 - python
-```
+```python
 Regex_Pattern = r'hackerrank'	# Do not delete 'r'.
 ```
 # [Matching Anything But a Newline](https://www.hackerrank.com/challenges/matching-anything-but-new-line/problem) - 5.0 - python
-```
+```python
 regex_pattern = r"^...\....\....\....$"	# Do not delete 'r'.
 ```
 # [Matching Digits & Non-Digit Characters](https://www.hackerrank.com/challenges/matching-digits-non-digit-character/problem) - 5.0 - python
-```
+```python
 Regex_Pattern = r"\d\d\D\d\d\D\d\d\d\d"	# Do not delete 'r'.
 ```
 # [Matching Whitespace & Non-Whitespace Character](https://www.hackerrank.com/challenges/matching-whitespace-non-whitespace-character/problem) - 5.0 - python
-```
+```python
 Regex_Pattern = r"\S\S\s\S\S\s\S\S"	# Do not delete 'r'.
 ```
 # [Matching Word & Non-Word Character](https://www.hackerrank.com/challenges/matching-word-non-word/problem) - 5.0 - python
-```
+```python
 Regex_Pattern = r"\w\w\w\W\w\w\w\w\w\w\w\w\w\w\W\w\w\w"	# Do not delete 'r'.
 ```
 # [Matching Start & End](https://www.hackerrank.com/challenges/matching-start-end/problem) - 5.0 - python
-```
+```python
 Regex_Pattern = r"^\d\w\w\w\w\.$"	# Do not delete 'r'.
 ```
 # [Comparing Numbers](https://www.hackerrank.com/challenges/bash-tutorials---comparing-numbers/problem) - 3.0 - bash
