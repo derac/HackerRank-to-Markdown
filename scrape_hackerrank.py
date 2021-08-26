@@ -1,4 +1,8 @@
-import requests, argparse, os, json, shutil
+import requests
+import argparse
+import os
+import json
+import shutil
 
 from math import ceil
 from time import sleep
@@ -12,7 +16,6 @@ parser.add_argument(
 )
 parser.add_argument(
     "-regenerate_cache",
-    "-regenerate",
     "-r",
     action="store_true",
     help="Regenerate the cache.",
@@ -81,15 +84,15 @@ if not os.path.isdir(problem_list_path):
         response = session.get(
             submissions_url.format(page * pages, pages), headers=headers
         )
-        with open(os.path.join(problem_list_path, str(page)), "wb") as f:
-            f.write(response.content)
+        with open(os.path.join(problem_list_path, str(page)), "wb") as file_handle:
+            file_handle.write(response.content)
         print("Page %s of %s written." % (page, pages))
         sleep(timeout)
 
 problems_dict = {}  # Gather data for all problems in list
 for page in os.listdir(problem_list_path):
-    with open(os.path.join(problem_list_path, page), "rb") as f:
-        problems_page = json.load(f)["models"]
+    with open(os.path.join(problem_list_path, page), "rb") as file_handle:
+        problems_page = json.load(file_handle)["models"]
     for problem in problems_page:
         if problem["challenge_id"] not in problems_dict:
             problems_dict[problem["challenge_id"]] = {
@@ -113,16 +116,16 @@ for i, problem in enumerate(problems_dict.values()):
         if not problem_json["model"]:
             print("ERROR:", problem_json["message"])
             break
-        with open(problem_path, "wb") as f:
-            f.write(response.content)
+        with open(problem_path, "wb") as file_handle:
+            file_handle.write(response.content)
             sleep(timeout)
     print("Problem %s of %s written." % (i, len(problems_dict)))
 
 problems_dict = {}  # Gather data from all problems
 for problem in os.listdir(problem_data_path):
     problem_path = os.path.join(problem_data_path, problem)
-    with open(problem_path) as f:
-        problem_json = json.loads(f.read())["model"]
+    with open(problem_path) as file_handle:
+        problem_json = json.loads(file_handle.read())["model"]
     if problem_json["status"] == "Accepted":
         problems_dict[problem_json["id"]] = {
             item: problem_json[item]
@@ -137,23 +140,17 @@ language_dict = {
     "oracle": "sql",
     "bash": "bash",
 }
-with open(os.path.join(run_path, "README.md"), "w") as f:
+with open(os.path.join(run_path, "README.md"), "w") as file_handle:
     for problem in sorted(
         problems_dict.values(), key=lambda p: -float(p["display_score"])
     ):
-        f.write(
-            "# [%s](%s) - %s - %s"
-            % (
-                problem["name"],
-                problem_url.format(problem["slug"]),
-                problem["display_score"],
-                problem["language"],
-            )
+        file_handle.write(
+            f'# [{problem["name"]}]({problem_url.format(problem["slug"])}) - {problem["display_score"]} - {problem["language"]}'
         )
         language = (
             language_dict[problem["language"]]
             if problem["language"] in language_dict
             else problem["language"]
         )
-        f.write("\n```%s\n%s\n```\n" % (language, problem["code"].strip()))
+        file_handle.write("\n```%s\n%s\n```\n" % (language, problem["code"].strip()))
 print("README.md written.")
